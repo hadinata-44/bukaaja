@@ -1,8 +1,8 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>    
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Love Dedep 3D</title>
+  <title>Semangat Dedep 3D</title>
   <style>
     body {
       margin: 0;
@@ -23,7 +23,6 @@
   </style>
 </head>
 <body>
-  <!-- Canvas untuk teks Love Dedep -->
   <canvas id="heart"></canvas>
 
   <script>
@@ -32,7 +31,7 @@
     resizeCanvas();
 
     let words = [];
-    let total = 120; // jumlah teks di hati
+    let total = 120;
     let t = 0;
 
     function resizeCanvas() {
@@ -42,15 +41,13 @@
     window.addEventListener("resize", resizeCanvas);
 
     for (let i = 0; i < total; i++) {
-      words.push({
-        angle: (i / total) * Math.PI * 2
-      });
+      words.push({ angle: (i / total) * Math.PI * 2 });
     }
 
     function heartFunction(angle) {
       let x = 16 * Math.pow(Math.sin(angle), 3);
       let y = 13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle);
-      return {x, y};
+      return { x, y };
     }
 
     function draw() {
@@ -62,24 +59,23 @@
       let offsetX = canvas.width / 2;
       let offsetY = canvas.height / 2;
 
-      words.forEach((word, i) => {
+      words.forEach(word => {
         let p = heartFunction(word.angle + t);
-        let depth = Math.sin(word.angle + t) * 10; // efek kedalaman
+        let depth = Math.sin(word.angle + t) * 10;
         let x = p.x * scale + offsetX;
         let y = -p.y * scale + offsetY;
 
         // Efek 3D: bayangan bertingkat
         for (let z = 0; z < 5; z++) {
           ctx.fillStyle = `rgba(255,50,150,${0.2 + z*0.15})`;
-          ctx.fillText("Love Dedep", x + z, y + z + depth);
+          ctx.fillText("semangat dedep", x + z, y + z + depth);
         }
 
-        // Teks utama putih
         ctx.fillStyle = "#ffffff";
-        ctx.fillText("Love Dedep", x, y + depth);
+        ctx.fillText("semangat dedep", x, y + depth);
       });
 
-      t += 0.01; // kecepatan rotasi
+      t += 0.15; // percepatan lebih terasa
       requestAnimationFrame(draw);
     }
 
