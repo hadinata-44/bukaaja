@@ -31,7 +31,7 @@
     resizeCanvas();
 
     let words = [];
-    let total = 120;
+    let total = 70; // cukup agar lancar di HP
     let t = 0;
 
     function resizeCanvas() {
@@ -53,29 +53,28 @@
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.textAlign = "center";
-      ctx.font = "bold 20px Arial";
+      ctx.font = "bold 18px Arial";
 
-      let scale = 18; 
+      let scale = 14; 
       let offsetX = canvas.width / 2;
       let offsetY = canvas.height / 2;
 
       words.forEach(word => {
         let p = heartFunction(word.angle + t);
-        let depth = Math.sin(word.angle + t) * 10;
+        let depth = Math.sin(word.angle + t) * 8;
         let x = p.x * scale + offsetX;
         let y = -p.y * scale + offsetY;
 
-        // Efek 3D: bayangan bertingkat
-        for (let z = 0; z < 5; z++) {
-          ctx.fillStyle = `rgba(255,50,150,${0.2 + z*0.15})`;
-          ctx.fillText("semangat dedep", x + z, y + z + depth);
-        }
+        // Bayangan tipis untuk efek 3D
+        ctx.fillStyle = "#ff3296"; // bayangan pink cerah
+        ctx.fillText("semangat dedep", x + 1, y + 1 + depth);
 
+        // Teks utama putih cerah
         ctx.fillStyle = "#ffffff";
         ctx.fillText("semangat dedep", x, y + depth);
       });
 
-      t += 0.15; // percepatan lebih terasa
+      t += 0.08; // kecepatan pas untuk HP
       requestAnimationFrame(draw);
     }
 
